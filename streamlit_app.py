@@ -38,12 +38,6 @@ try:
 
 except URLError as e:
   streamlit.error()
-        
-# Allow end users to add a fruit to the list
-def insert_row_snowflake(new_fruit):
-    with my_cnx.cursor() as my_cur:
-        my_cur.execute ("insert into fruit_load_list values ('"+new_fruit+"')")
-        return "Thanks for adding" + new_fruit
 
 streamlit.header("VIEW OUR FRUIT LIST - ADD YOUR FAVORITES!:")
 def get_fruit_load_list():
@@ -55,5 +49,11 @@ if streamlit.button('Get Fruit List'):
                     my_data_rows = get_fruit_load_list()
                     my_cnx.close()
                     streamlit.dataframe(my_data_rows)
-    
-streamlit.write('Thanks for adding the', add_my_fruit)
+    streamlit.write('Thanks for adding the', add_my_fruit)
+
+
+# Allow end users to add a fruit to the list
+def insert_row_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute ("insert into fruit_load_list values ('"+new_fruit+"')")
+        return "Thanks for adding" + new_fruit
